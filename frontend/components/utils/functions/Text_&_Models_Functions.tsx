@@ -1,7 +1,6 @@
-import { Alert } from 'react-native';
 import axios from 'axios';
 
-const SERVER = ' https://954b-5-29-16-236.ngrok-free.app';
+const SERVER = 'http://127.0.0.1:5000';
 
 // Function to translate text
 export const handleTextTranslate = async (
