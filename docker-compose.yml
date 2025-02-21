@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  whisper-backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    deploy:
+      resources:
+        limits:
+          memory: 12G # Optional, for Whisper memory usage
+
+  frontend:
+    build:
+      context: ./frontend/ReactNative
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
