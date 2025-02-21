@@ -1,19 +1,4 @@
 # 🗣️Audio & Text Translation Web App
-## 📖 Table of Contents
-
-- [Overview](#-Overview)
-- [Features](#️-Features)
-- [Backend Setup](#-backend-setup)
-- [Frontend Setup](#-frontend-setup)
-- [🐳 Docker Setup](#-docker-setup)
-- [Backend API Endpoints](#-backend-api-endpoints)
-  - [📝 Text Translation](#-text-translation)
-  - [🎙️ Voice Transcription + Translation](#-voice-transcription--translation)
-  - [Load Whisper Model](#-load-whisper-model)
-- [🛠️ Tech Stack](#-tech-stack)
-  - [Backend Technologies](#-backend-technologies)
-  - [Frontend Technologies](#-frontend-technologies)
-- [Folder Structure](#-folder-structure)
 ## Overview
 This **Full-Stack Translation Web App** provides **text and voice translation** with **AI-powered transcription and language detection**.  
 Users can choose a **translation model** based on **speed vs. accuracy**, ensuring **fast and seamless translations** without needing to specify the source language.  
