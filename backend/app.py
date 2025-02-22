@@ -8,12 +8,12 @@ CORS(app)
 @app.route('/')
 def home():
     return "Welcome to the Audio and Text Translation Api!"
-
+# A route to load a Whisper model.
 @app.route('/prepare_model', methods=['POST'])
 @log_decorator
 def prepare_whisper_model():
     data = request.form
-    model_name = data.get('model', 'small')
+    model_name = data.get('model', 'small') # default small
     try:
         load_model(model_name)
         logger.info(f"Model '{model_name}' loaded successfully and ready for use.")
@@ -25,4 +25,4 @@ def prepare_whisper_model():
 text_and_voice_translation_routes(app)
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=5000, debug=True)
+    app.run(host="0.0.0.0", port=5000, debug=True) # Set host to "0.0.0.0" for Docker compatibility

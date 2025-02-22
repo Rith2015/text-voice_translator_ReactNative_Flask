@@ -15,5 +15,5 @@ lang_codes = {
     'thai': 'th', 'turkish': 'tr', 'ukrainian': 'uk', 'urdu': 'ur', 'vietnamese': 'vi', 'welsh': 'cy',
     'hebrew': 'he', 'chinese (simplified)': 'zh-CN', 'chinese (traditional)': 'zh-TW'
 }
-# Get lang name from code, like: en->english
+# Get language name from code, like: en->english
 reverse_lang_codes = {v: k for k, v in lang_codes.items()}  

@@ -7,23 +7,25 @@ from functions import log_decorator, logger
 translator = Translator()
 
 def text_and_voice_translation_routes(app):
+    # A route for text translation
     @app.route('/text_translate', methods=['POST'])
     @log_decorator
     def text_translate():
-        target_lang = request.json.get("target_lang", "en")
-        chosen_lang = request.json.get("chosen_lang", "detect")
+        target_lang = request.json.get("target_lang", "en") # default: English
+        chosen_lang = request.json.get("chosen_lang", "detect") # default: detect
         original_text = request.json.get("text")
         if not original_text:
             logger.warning("No text provided")
             return jsonify({"error": "No text provided"}), 400
         try:
-            # Always detect the language
+            # Detects the language of the input text 
             detected_lang_code = translator.detect(original_text).lang  
 
-            # Correct 'iw' to 'he' for Hebrew
+            # Fixes Google Translate’s old Hebrew code ('iw' → 'he')
             if detected_lang_code == "iw":
                 detected_lang_code = "he"
-
+                
+            # Ensures the input text detected language matches the user-selected source language
             if chosen_lang != "detect" and detected_lang_code != chosen_lang:
                 logger.error(f"Text language mismatch: Detected '{detected_lang_code}', Expected '{chosen_lang}'")
                 return jsonify({"error": f"The text language does not match the chosen language."}), 400
@@ -40,23 +42,22 @@ def text_and_voice_translation_routes(app):
             logger.error(f"Text translation failed: {e}", exc_info=True)
             return jsonify({"error": str(e)}), 500
 
+    # A route for voice-to-text translation        
     @app.route('/voice_translate', methods=['POST'])
     @log_decorator
     def voice_translate():
-        model_name = request.form.get('model', 'small')
-        target_lang = request.form.get("target_lang", "en")
-        chosen_lang = request.form.get("chosen_lang", "detect")
+        model_name = request.form.get('model', 'small') # default: small
+        target_lang = request.form.get("target_lang", "en") # default: English
+        chosen_lang = request.form.get("chosen_lang", "detect") # default: detect
 
         if 'audio' not in request.files:
             logger.warning("No audio file provided.")
             return jsonify({"error": "No audio file provided"}), 400  
-
+        # Retrieves the uploaded audio file and logs its filename.
         audio_file = request.files['audio']
         logger.info(f"Received audio file: {audio_file.filename}")  
-
         try:
             whisper_model = load_model(model_name)
-
             # Save uploaded audio to a temp file
             with tempfile.NamedTemporaryFile(delete=False, suffix=".m4a") as temp_audio:
                 audio_file.save(temp_audio)
@@ -71,10 +72,11 @@ def text_and_voice_translation_routes(app):
                 logger.warning("No text captured from audio.")
                 return jsonify({"error": "No text captured from audio."}), 400
             
-            # Language correction (e.g., Hebrew)
+            # Fixes Whisper’s outdated Hebrew language code
             if detected_lang_code == 'iw':
                 detected_lang_code = 'he'
-
+        
+            # Ensures the detected spoken language matches the user-selected language.
             if chosen_lang != "detect" and detected_lang_code != chosen_lang:
                 logger.error(f"Detected language '{detected_lang_code}' does not match chosen '{chosen_lang}'.")  
                 return jsonify({"error": f"Detected language '{detected_lang_code}' does not match chosen '{chosen_lang}'."}), 400

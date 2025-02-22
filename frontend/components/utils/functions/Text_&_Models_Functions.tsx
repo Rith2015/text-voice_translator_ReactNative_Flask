@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const SERVER = 'http://127.0.0.1:5000';
 
-// Function to translate text
+// Function to Sends text to the backend for translation
 export const handleTextTranslate = async (
   text: string,
   chosenLang: string,
@@ -10,7 +10,7 @@ export const handleTextTranslate = async (
   setTranslatedText: (text: string) => void
 ) => {
   if (!text.trim()) {
-    window.alert("Failed to select model.");
+    window.alert("Please enter text to translate.");
     return;
   }
 
@@ -29,7 +29,7 @@ export const handleTextTranslate = async (
   }
 };
 
-// Function to select a model
+// Function to Sends a request to load the selected Whisper model.
 export const selectModel = async (
   selectedModel: string,
   setModelStatus: (status: string) => void

@@ -69,6 +69,7 @@ const langCodes = {
     'Chinese (Simplified)': 'zh-CN',
     'Chinese (Traditional)': 'zh-TW',
   };
+  // Reverses langCodes, mapping codes (e.g., "en") back to names (e.g., "English").
   const reverseLangCodes = Object.fromEntries(
     Object.entries(langCodes).map(([key, value]) => [value, key])
   );

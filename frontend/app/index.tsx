@@ -1,5 +1,5 @@
 import React, { useState, useReducer } from "react";
-import { View, Text, TextInput, Button, ScrollView, Alert, ActivityIndicator, TouchableOpacity } from "react-native"; 
+import { View, Text, TextInput, Button, ScrollView, ActivityIndicator, TouchableOpacity } from "react-native"; 
 import { useRouter } from "expo-router";
 import RNPickerSelect from "react-native-picker-select";
 import { handleTextTranslate, selectModel } from "../components/utils/functions/Text_&_Models_Functions";
@@ -9,16 +9,15 @@ import { voiceReducer, VoiceState } from "../components/utils/VoiceReducer";
 import styles from "../components/utils/translateApp_Styles";
 
 const initialState: VoiceState = {
-  model: "small",
-  selectedModel: "small",
-  isModelLoading: false,
-  chosenLang: "detect",
-  targetLang: "en",
-  detectedLanguage: "",
+  model: "small", // Default Whisper model (small).
+  selectedModel: "small", // Default Whisper model selection screen to (small).
+  isModelLoading: false, // Tracks model loading state.
+  chosenLang: "detect", 
+  targetLang: "en", // Default target language to english (en).
   originalText: "",
   translatedText: "",
   error: null,
-  isProcessing: false,
+  isProcessing: false, // Tracks loading state.
 };
 
 export default function TranslateScreen() {
@@ -26,9 +25,10 @@ export default function TranslateScreen() {
   const [text, setText] = useState("");
   const [translatedText, setTranslatedText] = useState("");
   const [modelStatus, setModelStatus] = useState("");
-  const [isRecording, setIsRecording] = useState(false);
+  const [isRecording, setIsRecording] = useState(false); // Boolean flag to track recording
   const [state, dispatch] = useReducer(voiceReducer, initialState);
 
+  // Converts language codes into names for dropdown options.
   const languageOptions = Object.entries(langCodes).map(([name, code]) => ({
     label: name,
     value: code,
