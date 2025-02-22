@@ -10,32 +10,39 @@ Users can choose a **translation model** based on **speed vs. accuracy**, ensuri
 - Whisper model caching for faster performance and to avoid reloading.
 - Logs every API request, execution time, and errors into app.log.
 ### React Native Web Frontend:
-- Text Translation input.
+- Text input and Translation output.
 - Voice Recording & Translation.
 - Whisper Model Selection.
 ## Features
 - **Text Translation:** Detect or specify source language and translate to the target language.
 - **Voice Translation:** Records audio, transcribe it, and translate the result.
 - **CORS Enabled:** Backend allows requests from frontend (React Native Web).
-- **Model Selection:**Choose Whisper model: base, small, medium for speed/accuracy balance.
+- **Model Selection:** Choose Whisper model: base, small, medium for speed/accuracy balance.
 
-## Install Dependencies
-1. Clone the repository:
-    ```bash
+## SetUp
+### Clone the repository:
     git clone <repository-url>
     cd <repository-folder>
 ### Backend Setup:
 1. Navigate to backend directory:
     ```bash
     cd ./backend
+    ```
 2. Install the required Python packages using one of the following methods:
-   ```bash
+
+    **Method 1: Install from `requirements.txt` (Recommended):**
+    ```bash
     pip install -r requirements.txt
+    ```
+    **Or Method 2: Install packages Manually**
+    ```bash
+    pip install flask flask-cors googletrans==4.0.0rc1 openai-whisper
+    ```
 3. Run Flask App
     ```bash
-    cd ./backend
     python app.py
-App will run at http://127.0.0.1:5000.
+    ```
+**App will run at http://127.0.0.1:5000.**
 
 ## **ffmpeg is needed to use Whisper**
 Follow the steps in this video:
@@ -44,13 +51,16 @@ Follow the steps in this video:
 1. Navigate to frontend directory:
     ```bash
     cd ./frontend
+    ```
 2. Install Dependencies
       ```bash
-      npm install
+      npm install --force
+      ```
 3. Run App in Web
     ```bash
     npm run web
-App will run at http://localhost:8081.
+    ```
+**App will run at http://localhost:8081.**
 
 ## 🐳 Docker Setup (Optional)
 1. Build and Run Docker:
@@ -60,8 +70,6 @@ App will run at http://localhost:8081.
     ```bash
     docker-compose build
     docker-compose up
-  
-
 ## Backend API Endpoints
 ### Text Translation:
 **Endpoint:** `/text_translate`  
@@ -112,6 +120,14 @@ Form Data:
 | **Transcription**  | OpenAI **Whisper** for speech-to-text                     |
 | **Containerization** | Docker for seamless deployment                          |
 | **Logging**        | Python **logging** module for request tracking & errors   |
+
+#### Explanation of Each Python Package:
+| **Package**           | **Purpose** |
+|-----------------------|----------------------------------------------------------|
+| `flask`              | Core backend framework for building APIs. |
+| `flask-cors`         | Enables Cross-Origin Resource Sharing (CORS) support, allowing the frontend to interact with the backend. |
+| `googletrans==4.0.0rc1` | Provides access to Google Translate API for text translation. |
+| `openai-whisper`     | OpenAI's Whisper model for **speech-to-text transcription.**|
 
 ### Frontend Technologies
 | **Component**         | **Technology Used**                                      |

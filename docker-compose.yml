@@ -10,7 +10,7 @@ services:
     deploy:
       resources:
         limits:
-          memory: 12G # Optional, for Whisper memory usage
+          memory: 12G # for Whisper memory usage
 
   frontend:
     build:
