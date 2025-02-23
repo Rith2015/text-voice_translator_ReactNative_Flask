@@ -64,7 +64,7 @@ def text_and_voice_translation_routes(app):
                 temp_audio_path = temp_audio.name
 
             # Transcribe audio from the temp file
-            result = whisper_model.transcribe(temp_audio_path)
+            result = whisper_model.transcribe(temp_audio_path, fp16=False)
             text = result['text'].strip()
             detected_lang_code = result.get('language', 'en')
 

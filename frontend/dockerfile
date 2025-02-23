@@ -1,28 +1,17 @@
-# Use a Node base image
 FROM node:20
 
-# Set working directory
 WORKDIR /app
 
-# Copy package files
 COPY package.json package-lock.json ./ 
 
-# Install dependencies with legacy-peer-deps
 RUN npm install --legacy-peer-deps
-
-# Install missing picker dependency
 RUN npm install @react-native-picker/picker --legacy-peer-deps
-
-# Install Webpack config if needed (optional)
 RUN npm install @expo/webpack-config --legacy-peer-deps
 
-# Copy the rest of the app
 COPY . .
 
-# Generate static web build
 RUN npx expo export
 
-# Expose port for web
 EXPOSE 3000
 
 CMD ["npx", "serve", "dist"]

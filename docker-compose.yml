@@ -1,7 +1,7 @@
 version: '3.8'
 
 services:
-  whisper-backend:
+  backend:
     build:
       context: ./backend
       dockerfile: Dockerfile
@@ -14,7 +14,7 @@ services:
 
   frontend:
     build:
-      context: ./frontend/ReactNative
+      context: ./frontend
       dockerfile: Dockerfile
     ports:
       - "3000:3000"
