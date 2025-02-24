@@ -12,7 +12,7 @@ def log_decorator(func):
     def wrapper(*args, **kwargs):
         start_time = time.time()
         # Logs when a function is called and its arguments.
-        logger.info(f"Function '{func.__name__}' called with args: {args}, kwargs: {kwargs}")
+        logger.info(f"Function '{func.__name__}' was called.")
         try:
             result = func(*args, **kwargs)
             end_time = time.time()
